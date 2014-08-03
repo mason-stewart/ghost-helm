@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" media="all" href="stylesheets/ghost-shield.css">
+    <link type="text/css" rel="stylesheet" media="all" href="stylesheets/styleguide.css">
+    <link type="text/css" rel="stylesheet" media="all" href="stylesheets/prettify.css">
+    <link type="text/css" rel="stylesheet" media="all" href="webfonts/ss-social.css">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//use.typekit.net/zza7guc.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body onload="prettyPrint()">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 sg-header">
+          <h1>Welcome to Ghost Shield</h1>
+          <h3>The Official Iron Yard Styleguide</h3>
+        </div>
+        <div class="col-md-12 sg-main">
+          <div id="colors">
+            <h2 class="section-headline">Color Variables</h2>
+            <div class="sg-container sg-colors">
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle gray-light-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>Gray option for section backgrounds</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$gray-light
+
+// class
+.gray-light-bg
+.gray-light-triangle
+
+
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle gray-med-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>Another gray option for a section</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$gray-med
+
+// class
+.gray-med-bg
+.gray-med-text
+.gray-med-triangle
+
+</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle gray-dark-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>Footer background & default text color</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$gray-dark
+
+// class
+.gray-dark-bg
+.gray-dark-text
+.gray-dark-triangle
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle blue-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For Mobile course</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$blue
+
+// classes
+.blue-bg
+.blue-triangle
+.blue-text
+</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle yellow-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For JS course</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$yellow
+
+// classes
+.yellow-bg
+.yellow-triangle
+.yellow-text
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle red-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For Ruby course</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$red
+
+// classes
+.red-bg
+.red-triangle
+.red-text
+</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle gold-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For Academy section</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$gold
+
+// class
+.gold-bg
+.gold-triangle
+.gold-text
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle green-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For locations section</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$green
+
+// class
+.green-bg
+.green-text
+
+</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle red-orange-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For events section</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$red-orange
+
+// class
+.red-orange-bg
+.red-orange-bg
+.red-orange-triangle
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle turquoise-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For accelerator section</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$turquoise
+
+// class
+.turquoise-bg
+.turquoise-text
+.turquoise-triangle        
+
+</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle blue-contact-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>For 'Say Hello' button</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$blue-contact
+
+// class
+.blue-contact-bg
+</code></pre>
+                </div>
+                <div class="col-sm-2">
+                  <div class="sg-circle blue-link-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>It's blue!</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$blue-link
+
+// class
+.blue-link-bg 
+.blue-text
+.blue-triangle</code></pre>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="sg-circle purple-bg"></div>
+                </div>
+                <div class="col-sm-4 sg-example">
+                  <p>It's purple!</p>
+                  <pre><code class="prettyprint lang-jade">// variable
+$purple
+
+// class
+.purple-bg
+.purple-text
+.purple-triangle</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="buttons">
+            <h2 class="section-headline">Button Styles</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn">Learn More</a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn hover-red">Learn More</a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn.hover-red
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn hover-yellow">Learn More</a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn.hover-yellow
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn hover-purple">Learn More</a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn.hover-purple
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn hover-blue">Learn More</a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn.hover-blue
+
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-demo"><a href="#" class="btn btn-contact"><img src="http://theironyard.com/images/email.png">
+                    <p>Say Hello</p></a></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+a.btn.btn-contact(href="#")
+  img(src="http://theironyard.com/images/email.png")
+  p Say Hello</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="typography">
+            <h2 class="section-headline">Typography</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Headings</h3>
+                </div>
+                <div class="sg-demo">
+                  <h1>h1. Hella mumblecore</h1>
+                  <h2>h2. Letterpress fashion axe</h2>
+                  <h3>h3. Deep v bicycle rights</h3>
+                  <h4>h4. Put a bird on it</h4>
+                  <h5>h5. Tofu organic</h5>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+h1 Hella mumblecore
+h2 Letterpress fashion axe
+h3 Deep v bicycle
+h4 Put a bird on it
+h5 Tofu organic
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Paragraphs</h3>
+                </div>
+                <div class="sg-demo">
+                  <p>Art party wayfarers Schlitz photo booth lomo, authentic whatever bicycle rights Thundercats DIY. Master cleanse Portland squid, beard keytar Helvetica sriracha street art gentrify art party ethnic. Typewriter fixie kale chips craft beer Truffaut. Vegan direct trade meh, pour-over actually kale chips wayfarers Portland. Cardigan Williamsburg flexitarian, narwhal master cleanse McSweeney's banh mi letterpress ennui brunch chia polaroid hoodie meggings 8-bit. </p>
+                  <p>Here is what a paragraph would look like. And here is a <a href="#">link</a>.</p>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+p Art party wayfarers Schlitz photo booth lomo ... 
+---
+p Here is a paragraph with a &lt;a href="#"&gt;link&lt;/a&gt;.
+
+</code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Unordered Lists</h3>
+                </div>
+                <div class="sg-demo">
+                  <ul>
+                    <li>Selvage Portland keytar</li>
+                    <li>Hashtag PBR&amp;B</li>
+                    <li><strong>For longer bullets, use the &lt;strong&gt; tag at the beginning.</strong>Wes Anderson craft beer 90's, leggings bitters gentrify gastropub normcore Shoreditch polaroid Cosby sweater tattooed. Drinking vinegar brunch leggings Carles, chillwave authentic cray stumptown cardigan hella. Meh artisan lo-fi pour-over distillery. Gluten-free put a bird on it drinking vinegar, Thundercats mumblecore wayfarers blog scenester small batch. </li>
+                    <ul>
+                      <li>Raw denim</li>
+                      <li>Gluten-free Etsy pug</li>
+                      <li>Thundercats</li>
+                    </ul>
+                  </ul>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+ul
+  li Selvage Portland keytar
+  li Hashtag PBR&B
+  li &lt;strong&gt;For longer bullets ...&lt;/strong&gt; ...
+  ul
+    li Raw denim
+    li Gluten-free Etsy pug
+    li Thundercats
+    </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Ordered Lists</h3>
+                </div>
+                <div class="sg-demo">
+                  <ol>
+                    <li>Direct trade</li>
+                    <li>Neutra bitters</li>
+                    <li>Wes Anderson</li>
+                  </ol>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+ol
+  li Direct trade
+  li Neutra bitters
+  li Wes Anderson
+  </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Pullquotes</h3>
+                </div>
+                <div class="sg-demo">
+                  <blockquote>
+                    <p>"Organic YOLO chambray American Apparel kale chips. Squid stumptown cardigan gentrify, try-hard seitan sartorial gluten-free messenger bag before they sold out." </p>
+                    <footer>- Hispteria Crazedor, Coffee Shop Prophet</footer>
+                  </blockquote>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+blockquote
+  p. 
+    "Organic YOLO chambray American Apparel kale chips. 
+    Squid stumptown cardigan gentrify, try-hard seitan 
+    sartorial gluten-free before they sold out." 
+  footer - Hispteria Crazedor, Coffee Shop Prophet</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="photos">
+            <h2 class="section-headline">Photos and Images</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Thumbnail Photo</h3>
+                  <p>It's cool for small photos.</p>
+                </div>
+                <div class="sg-demo"><img src="images/sg/big-donuts.jpg" class="photo-thumbnail"></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">--- 
+img.photo-thumbnail(src="images/sg/big-donuts.jpg")
+</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Mentor Photo</h3>
+                </div>
+                <div class="sg-demo"><img src="images/sg/strawberry-donuts.jpg" class="photo-mentor"></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">--- 
+img.photo-mentor(src="images/sg/strawberry-donuts.jpg")
+</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Bio Photo</h3>
+                </div>
+                <div class="sg-demo"><img src="images/sg/chocolate-donuts.jpg" class="photo-bio"></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">--- 
+img.photo-bio(src="images/sg/chocolate-donuts.jpg")
+</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Container-width Photo</h3>
+                  <p>This is great when you don't care.</p>
+                </div>
+                <div class="sg-demo"><img src="images/sg/so-many-donuts.jpg" class="photo"></div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">--- 
+img.photo(src="images/sg/so-many-donuts.jpg")</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="tables">
+            <h2 class="section-headline">Tables</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Class Table</h3>
+                </div>
+                <div class="sg-demo">
+                  <h3 class="blue-text">Table title</h3>
+                  <table class="class-table">
+                    <tbody>
+                      <tr class="active">
+                        <td>Start date</td>
+                        <td>Location</td>
+                        <td>Instructor</td>
+                        <td><a href="#" class="btn">Closed</a></td>
+                      </tr>
+                      <tr>
+                        <td>Start date</td>
+                        <td>Location</td>
+                        <td>Instructor</td>
+                        <td><a href="#" class="btn">Apply</a></td>
+                      </tr>
+                      <tr>
+                        <td>Start date</td>
+                        <td>Location</td>
+                        <td>Instructor</td>
+                        <td><a href="#" class="btn">Wait List</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+h3.blue-text Table title
+table.class-table
+  tr.active
+    td Start date
+    td Location
+    td Instructor
+      a.btn(href="#") Closed
+  tr
+    td Start date
+    td Location
+    td Instructor
+      a.btn(href="#") Apply
+  tr
+    td Start date
+    td Location
+    td Instructor
+      a.btn(href="#") Wait List</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="containers">
+            <h2 class="section-headline">Containers</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Single Column Container</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="callout-box">
+                    <h4>Questions? Want to know what makes us different?</h4>
+                    <p>Call <strong><a href="tel:+18553992275">(855) 399-2275</a></strong> to talk to someone on the team.</p><span>(You can also <a href="#">shoot us an email</a> or jump into our <a href="#">Academy Chat</a>.)</span>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+<strong>.callout-box</strong>
+  h4 Questions? Want to know what makes us different?
+  p. 
+    Call &lt;strong&gt;&lt;a href="tel:+18553992275"&gt; (855) 399-2275&lt;/a&gt;&lt;/strong&gt;
+    to talk to someone on the team.
+  span.
+    (You can also &lt;a href="#"&gt;shoot us an email&lt;/a&gt; or jump into 
+      our &lt;a href="#"&gt;Academy Chat&lt;/a&gt;.)
+      
+      </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Two Column With Divider</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="two-col-sb">
+                    <div class="row divide-container">
+                      <div class="col-sm-6 divider-left">
+                        <h2>Left Column </h2>
+                        <p>Pork belly banjo asymmetrical slow-carb, gluten-free farm-to-table synth lo-fi.</em></p>
+                        <p><em>Irony kitsch synth meh. Food truck Blue Bottle swag, wolf Odd Future slow-carb Etsy Intelligentsia synth High Life narwhal tofu. Sustainable ugh kale chips pop-up Blue Bottle Intelligentsia, Odd Future chillwave.</em></p>
+                      </div>
+                      <div class="col-sm-6">
+                        <h2>Right Column</h2>
+                        <ul>
+                          <li>sold out locavore irony</li>
+                          <li>Austin bicycle rights beard </li>
+                          <li>small batch vegan sriracha PBR</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+.two-col-sb
+  .row
+    //add .divider-left to the column on the left to create the divider
+    .col-sm-6.divider-left
+      h2 Left Column 
+      p Copy
+    .col-sm-6
+      h4 Right Column
+      p More copy
+      
+      </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Two Column Bio Container</h3>
+                </div>
+                <div class="sg-demo">
+                  <div style="margin: 0px;" class="bio">
+                    <div class="bio-left"><img src="images/sg/nyancat.gif" class="photo-bio"><a href="#" class="btn btn-contact"><img src="http://theironyard.com/images/email.png">
+                        <p>Say hello</p></a></div>
+                    <div class="bio-right">
+                      <h2>Nyan</h2>
+                      <h4>Erlang Engineer</h4>
+                      <p>American Apparel wayfarers normcore mustache, Truffaut Intelligentsia XOXO irony deep v photo booth locavore next level. Helvetica post-ironic four loko dreamcatcher normcore gluten-free, tofu Wes Anderson. Next level retro Schlitz, cardigan cliche jean shorts shabby chic. Hashtag cliche bitters cred Banksy salvia. Austin ennui raw denim Thundercats, wolf asymmetrical paleo. </p>
+                      <ul class="links">
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <li><a href="#">Link 4</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---   
+.bio
+  .bio-left
+    img.photo-bio(src="images/sg/nyancat.gif")
+    a.btn.btn-contact(href="#")
+      img(src="http://theironyard.com/images/email.png")
+      p Say hello
+  .bio-right
+    h2 Nyan
+    h4 Erlang Engineer
+    p ...
+    ul.links
+      li: a(href="#") Link 1
+      li: a(href="#") Link 2
+      li: a(href="#") Link 3
+      li: a(href="#") Link 4
+      </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Three Column Container w/Call To Action (cta)</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="three-col-cta row">
+                    <div class="col-lg-2 col-sm-2">
+                      <div class="image-box"><img src="http://theironyard.com/images/icons/front-end-engineering-logo.png"></div>
+                    </div>
+                    <div class="col-lg-7 col-sm-6">
+                      <h3>Copy Title</h3>
+                      <p>Tote bag meh +1, master cleanse sustainable literally chia messenger bag fingerstache cray organic. Banksy deep v before they sold out iPhone umami. </p>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 cta-box"><a href="#" class="btn hover-yellow">Learn More</a></div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+.three-col-cta.row
+  .col-lg-2.col-sm-2
+    .image-box
+      img(src="images/icons/front-end-engineering-logo.png")
+  .col-lg-7.col-sm-6
+    h3 Copy Title
+    p Tote bag meh ...
+  .col-lg-3.col-sm-4.cta-box
+    a(href="#").btn.hover-yellow Learn More</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="navigation">
+            <h2 class="section-headline">Navigation</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Header</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="header yellow-bg">
+                    <div class="logo"><img src="images/iron-yard-logo.svg"></div>
+                    <div class="nav">
+                      <div class="primary-nav">
+                        <ul>
+                          <li><a href="#">Locations</a></li>
+                          <li><a href="#">Events</a></li>
+                          <li><a href="#">Academy</a></li>
+                          <li><a href="#">Accelerator</a></li>
+                        </ul>
+                      </div>
+                      <div class="secondary-nav">
+                        <ul>
+                          <li><a href="#">Jobs</a></li>
+                          <li><a href="#">About</a></li>
+                          <li><a href="#">News</a></li>
+                          <li><a href="#">Blog</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+.header.yellow-bg
+  .logo
+    img(src="images/iron-yard-logo.svg")
+  .nav
+    .primary-nav
+      ul
+        li: a(href="#") Locations
+        li: a(href="#") Events
+        li: a(href="#") Academy
+        li: a(href="#") Accelerator
+    ---
+    .secondary-nav
+      ul
+        li: a(href="#") Jobs
+        li: a(href="#") About
+        li: a(href="#") News
+        li: a(href="#") Blog
+        
+        </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Top Navigation</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="sub-nav blue-bg">
+                    <h2>Cool Nav</h2>
+                    <ul>
+                      <li><a href="#">Hire Graduates</a></li>
+                      <li><a href="#">Alumni</a></li>
+                      <li><a href="#">FAQs</a></li>
+                      <li><a href="#">Kids Classes</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+.sub-nav.blue-bg
+  h2 Cool Nav
+  ul
+    li: a(href="#") Hire Graduates
+    li: a(href="#") Alumni
+    li: a(href="#") FAQs
+    li: a(href="#") Kids Classes
+    
+    </code></pre>
+                </div>
+              </div>
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Footer</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="container-fluid gray-dark-bg">
+                    <!--don't add this width in the wild-->
+                    <div style="width:90%" class="footer">
+                      <div class="row">
+                        <div class="logo"><img src="/images/footer-logo.png"></div>
+                        <div class="footer-nav">
+                          <ul>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/jobs">Jobs</a></li>
+                            <li><a href="http://news.theironyard.com">News</a></li>
+                            <li><a href="http://blog.theironyard.com">Blog</a></li>
+                            <li><a href="/locations">Locations</a></li>
+                            <li><a href="/academy">Academy</a></li>
+                            <li><a href="/accelerator">Accelerator</a></li>
+                          </ul>
+                        </div>
+                        <div class="social-nav">
+                          <ul>
+                            <li><a href="http://twitter.com/theironyard" class="ss-icon">twitter</a></li>
+                            <li><a href="http://facebook.com/theironyard" class="ss-icon">facebook</a></li>
+                            <li><a href="http://vimeo.com/theironyard" class="ss-icon">vimeo  </a></li>
+                          </ul>
+                        </div>
+                        <div class="copyright">©2014 The Iron Yard. All Rights Reserved  </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+.container-fluid.gray-dark-bg
+  .footer
+    .row
+      .logo
+        img(src="/images/footer-logo.png")
+      .footer-nav: ul
+        li: a(href="/about") About
+        li: a(href="/jobs") Jobs
+        li: a(href="http://news.theironyard.com") News
+        . . .
+      .social-nav: ul
+        li: a(href="http://twitter.com/theironyard").ss-icon twitter
+        li: a(href="http://facebook.com/theironyard").ss-icon facebook
+        li: a(href="http://vimeo.com/theironyard").ss-icon vimeo  
+        
+      .copyright ©2014 The Iron Yard. All Rights Reserved  
+      </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="layout">
+            <h2 class="section-headline">Layout</h2>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Complete Nav-Bar with Triangle</h3>
+                </div>
+                <div class="sg-demo">
+                  <div class="container-fluid">
+                    <div class="header gray-dark-bg">
+                      <div class="wrapper">
+                        <div class="logo"><img src="images/iron-yard-logo.svg"></div>
+                        <div class="nav">
+                          <div class="primary-nav">
+                            <ul>
+                              <li><a href="#">Locations</a></li>
+                              <li><a href="#">Events</a></li>
+                              <li><a href="#">Academy</a></li>
+                              <li><a href="#">Accelerator</a></li>
+                            </ul>
+                          </div>
+                          <div class="secondary-nav">
+                            <ul>
+                              <li><a href="#">Jobs</a></li>
+                              <li><a href="#">About</a></li>
+                              <li><a href="#">News</a></li>
+                              <li><a href="#">Blog           </a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row sub-nav gray-dark-bg">
+                      <div class="wrapper">
+                        <h2>Cool Nav</h2>
+                        <ul>
+                          <li><a href="#">Hire Graduates</a></li>
+                          <li><a href="#">Alumni</a></li>
+                          <li><a href="#">FAQs</a></li>
+                          <li><a href="#">Kids Classes      </a></li>
+                        </ul>
+                        <div style="bottom:-58px" class="triangle gray-dark-triangle"> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+  .container-fluid
+    .header.gray-dark-bg
+      .wrapper
+        .logo
+          img(src="images/iron-yard-logo.svg")
+        .nav
+          .primary-nav
+            ul
+              li: a(href="#") Locations
+              li ...
+          .secondary-nav
+            ul
+              li ...
+              
+    .row.sub-nav.gray-dark-bg
+      .wrapper 
+        h2 Cool Nav
+        ul
+          li: a(href="#") Hire Graduates
+          li ...
+        // the second class is used to determine the color of the triangle. 
+        // the color must match the class applied to .header and .sub-nav           
+        .triangle.gray-dark-triangle
+        </code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="sg-container">
+              <div class="sg-section">
+                <div class="sg-info">
+                  <h3>Screen-Width Section</h3>
+                </div>
+                <div style="padding:0" class="sg-demo">
+                  <div class="horizontal-section gray-light-bg">
+                    <div style="width:90%" class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h2>Awesome Content</h2>
+                          <p>Letterpress quinoa raw denim, hoodie kale chips stumptown biodiesel Echo Park scenester XOXO 8-bit you probably haven't heard of them. Banksy Helvetica gentrify, distillery hoodie selfies art party American Apparel Truffaut fashion axe irony Tumblr salvia 8-bit keffiyeh.</p>
+                        </div>
+                        <div class="col-md-6">
+                          <h2>Great Job</h2>
+                          <ul>
+                            <li>Sustainable kale chips</li>
+                            <li>Blue Bottle boat shoes</li>
+                            <li>Odd Future chillwave</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sg-code">
+                  <pre><code class="prettyprint lang-jade">---
+  // As long as you have a .container nested within the .horizontal-section div,
+  // you can use whatever content you like within this class.
+  .horizontal-section.gray-light-bg
+    .container
+      .row
+        .col-md-6
+          h2.section-headline Awesome Content
+          p Letterpress quinoa raw denim, 8-bit stumptown biodiesel. . . 
+        .col-md-6
+          h2.section-headline Great Job
+          ul
+            li Sustainable kale chips
+            li Blue Bottle boat shoes
+            li Odd Future chillwave
+            </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/prettify.js"></script>
+    <script src="scripts/lang-jade.js"></script>
+  </body>
+</html>

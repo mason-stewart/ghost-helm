@@ -1,0 +1,72 @@
+{
+  "name": "ghost-helm",
+  "version": "0.0.0",
+  "main": "lib/ghost-helm.js",
+  "description": "A set of build tools for The Iron Yard",
+  "homepage": "https://github.com/masondesu/ghost-helm",
+  "bugs": "https://github.com/masondesu/ghost-helm/issues",
+  "author": {
+    "name": "Mason Stewart",
+    "email": "",
+    "url": "https://github.com/masondesu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masondesu/ghost-helm"
+  },
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "ghost-helm",
+    ""
+  ],
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "coveralls": "*",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "gulp": "^3.8.6",
+    "gulp-autoprefixer": "^0.0.6",
+    "gulp-bower-files": "^0.2.1",
+    "gulp-cache": "^0.1.1",
+    "gulp-csso": "^0.2.6",
+    "gulp-filter": "^0.5.0",
+    "gulp-flatten": "^0.0.2",
+    "gulp-gh-pages": "^0.3.3",
+    "gulp-if": "^1.2.1",
+    "gulp-imagemin": "^0.3.0",
+    "gulp-jade": "^0.6.1",
+    "gulp-jshint": "^1.5.3",
+    "gulp-livereload": "^1.2.0",
+    "gulp-load-plugins": "^0.5.0",
+    "gulp-plumber": "^0.6.3",
+    "gulp-print": "^1.1.0",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-sass": "^0.7.2",
+    "gulp-sitemap": "^0.3.3",
+    "gulp-size": "^0.3.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp-useref": "^0.5.0",
+    "gulp-util": "^3.0.0",
+    "istanbul": "*",
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0",
+    "lodash.assign": "^2.4.1",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
+    "node-bourbon": "^1.2.3",
+    "q": "^1.0.1",
+    "time-grunt": "^0.3.1"
+  },
+  "scripts": {
+    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "bin": {
+    "ghost-helm": "cli.js"
+  },
+  "preferGlobal": "true"
+}

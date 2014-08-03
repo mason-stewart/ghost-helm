@@ -1,0 +1,26 @@
+{
+  "name": "ghost-shield",
+  "version": "0.0.1",
+  "homepage": "https://github.com/masondesu/ghost-shield",
+  "authors": [
+    "Mason Stewart <masondesu@gmail.com>",
+    "Daniel Donaldson <donaldson.daniel@gmail.com>",
+    "Joshua Maxwell <maxwell.joshua@gmail.com>"
+  ],
+  "description": "The Styleguide of The Iron Yard",
+  "main": "dist/ghost-shield.css",
+  "license": "MIT",
+  "ignore": [
+    "src",
+    "dist/images/sg",
+    "dist/scripts",
+    "dist/index.html",
+    "package.json",
+    ".gitignore",
+    "gulpfile.js",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

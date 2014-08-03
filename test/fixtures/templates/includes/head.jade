@@ -1,0 +1,21 @@
+meta(charset="utf-8")
+meta(name="viewport" content="width=device-width, initial-scale=1")
+// Place favicon.ico and apple-touch-icon.png in the root directory
+
+// build:css /styles/vendor.css
+// bower:css
+link(rel="stylesheet" href="/bower_components/ghost-shield/dist/stylesheets/ghost-shield.css")
+link(rel="stylesheet" href="/bower_components/ghost-shield/dist/webfonts/ss-social.css")
+// endbower
+// endbuild
+
+// build:css({test/.tmp,test/fixtures}) /styles/main.css
+link(rel="stylesheet" href="/styles/main.css")
+// endbuild
+
+// build:js /scripts/vendor/modernizr.js
+script(src="/bower_components/modernizr/modernizr.js")
+// endbuild
+
+script(type="text/javascript" src="//use.typekit.net/zza7guc.js")
+script(type="text/javascript") try{Typekit.load();}catch(e){}
