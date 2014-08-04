@@ -8,16 +8,16 @@
 
 'use strict';
 
-  // Hey!
+// Hey!
 
-  //                           _               
-  //    ________  ____ ___  __(_)_______  _____
-  //   / ___/ _ \/ __ `/ / / / / ___/ _ \/ ___/
-  //  / /  /  __/ /_/ / /_/ / / /  /  __(__  ) 
-  // /_/   \___/\__, /\__,_/_/_/   \___/____/  
-  //              /_/                          
+//                           _               
+//    ________  ____ ___  __(_)_______  _____
+//   / ___/ _ \/ __ `/ / / / / ___/ _ \/ ___/
+//  / /  /  __/ /_/ / /_/ / / /  /  __(__  ) 
+// /_/   \___/\__, /\__,_/_/_/   \___/____/  
+//              /_/                          
 
-  var gulp = require('gulp'),
+var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     exec = require('child_process').exec,
     assign  = require("lodash.assign"),
@@ -32,9 +32,43 @@
     // automatically load them into the $ object.
     // Note that modules with dashes in the name
     // become camelCase in $ object.
-    $ = require('gulp-load-plugins')();
+    $ = require('gulp-load-plugins')(),
+    // the defaults
+    defaults = {
+      distDir: 'dist',
+
+      templatesDir: 'test/fixtures/templates/pages/**/*.jade',
+      templatesBaseDir: 'test/fixtures/templates',
+      templatesDistDir: 'test/.tmp',
+
+      stylesDir: 'app/styles/main.scss',
+      stylesDistDir: '.tmp/styles',
+
+      jsDir: 'app/scripts/**/*.js',
+
+      assetBuildDir: '.tmp/**/*.html',
+      userefSearchPath: ['app','.tmp'],
+
+      imagesDir: ['app/images/**/*', 'app/bower_components/ghost-shield/dist/images/**/*'],
+      imagesDistDir: 'dist/images',
+
+      fontDir: ['app/bower_components/ghost-shield/dist/webfonts/*'],
+
+      cname: 'CNAME',
+
+      sitemapDir: 'dist/**/*.html',
+      siteUrl: 'http://theironyard.com',
+
+      cleanDir: ['.tmp', 'dist'],
+
+      // deployCommand: 'sh deploy.sh',
+      deployCommand: 'ls',
+    };
 
 module.exports.setup = function(config, outerGulp){
+  // Overrite defaults with user config properties
+  config = config || {};
+  config = assign(defaults, config);
 
   //        _           __   
   //       (_)___ _____/ /__ 
@@ -233,7 +267,7 @@ module.exports.setup = function(config, outerGulp){
   // After build-step-1 promise is resolved , we can
   // safely generate a sitemap and put it in dist
   gulp.task('sitemap', function () {
-    gulp.src(config.sitemapDir, {
+    return gulp.src(config.sitemapDir, {
       read: false
     }).pipe($.sitemap({
         siteUrl: config.siteUrl
@@ -356,8 +390,3 @@ module.exports.setup = function(config, outerGulp){
   outerGulp.tasks = assign({}, gulp.tasks, outerGulp.tasks);
 
 }
-
-module.exports.start = function(task){
-  return gulp.start(task);
-}
-
