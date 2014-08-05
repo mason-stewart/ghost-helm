@@ -70,6 +70,7 @@ module.exports.setup = function(config, outerGulp){
   config = config || {};
   config = assign(defaults, config);
 
+
   //        _           __   
   //       (_)___ _____/ /__ 
   //      / / __ `/ __  / _ \
@@ -79,7 +80,7 @@ module.exports.setup = function(config, outerGulp){
 
   // Let's take all of the jade templates, pre-process them,
   // and story them in .tmp
-  gulp.task('templates', function() {
+  gulp.task('templates', ['clean'], function() {
     return gulp.src(config.templatesDir)
     .pipe($.jade({
       basedir: config.templatesBaseDir,
@@ -98,7 +99,7 @@ module.exports.setup = function(config, outerGulp){
 
   // Let's crunch *local* styles (non-ghost-shield) 
   // in app/styles/main.scss and put them .tmp/styles
-  gulp.task('styles', function () {
+  gulp.task('styles', ['clean'], function () {
     return gulp.src(config.stylesDir)
       .pipe($.sass({
         // gulp-sass was blowing up without the next two line
@@ -122,7 +123,7 @@ module.exports.setup = function(config, outerGulp){
 
   // Just run everything through JS Hint.
   // Don't move the files though. We'll do that later.
-  gulp.task('scripts', function () {
+  gulp.task('scripts', ['clean'], function () {
     return gulp.src(config.jsDir)
       .pipe($.jshint())
       .pipe($.jshint.reporter($.jshintStylish))
@@ -130,12 +131,12 @@ module.exports.setup = function(config, outerGulp){
   });
 
 
-  //                         __     __          _ __    __
-  //   ____ ______________  / /_   / /_  __  __(_) /___/ /
-  //  / __ `/ ___/ ___/ _ \/ __/  / __ \/ / / / / / __  / 
-  // / /_/ (__  |__  )  __/ /_   / /_/ / /_/ / / / /_/ /  
-  // \__,_/____/____/\___/\__/  /_.___/\__,_/_/_/\__,_/   
-                                                       
+  //                                    ____
+  //   __  __________        ________  / __/
+  //  / / / / ___/ _ \______/ ___/ _ \/ /_  
+  // / /_/ (__  )  __/_____/ /  /  __/ __/  
+  // \__,_/____/\___/     /_/   \___/_/     
+                                                                                             
   // This task does a number of things. It's responsible for
   // calling useref, which 
   //    * looks at the build directives in the html,
@@ -146,14 +147,12 @@ module.exports.setup = function(config, outerGulp){
   // We also use gulp-filter to grab just the JS and just the CSS
   // optimize, minify, etc.
 
-  gulp.task('asset-build', ['templates', 'styles', 'scripts'], function () {
+  gulp.task('use-ref', ['templates', 'styles', 'scripts'], function () {
     // quick error handler for gulp-plumber
     var onError = function (err) {
       console.error(err);
       throw err;
     };
-
-
 
     // grab all the html in .tmp
     return gulp.src(config.assetBuildDir)
@@ -195,7 +194,7 @@ module.exports.setup = function(config, outerGulp){
 
   // Look in both local app/images and ghost-shield for images,
   // optimize them and put them in dist/images
-  gulp.task('images',  function () {
+  gulp.task('images', ['cname', 'use-ref', 'fonts'],  function () {
     return gulp.src(config.imagesDir)
       // .pipe($.cache($.imagemin({
       //   optimizationLevel: 3,
@@ -206,26 +205,6 @@ module.exports.setup = function(config, outerGulp){
       .pipe($.size());
   });
 
-  //                                 _               
-  //     ____  _________  ____ ___  (_)_______  _____
-  //    / __ \/ ___/ __ \/ __ `__ \/ / ___/ _ \/ ___/
-  //   / /_/ / /  / /_/ / / / / / / (__  )  __(__  ) 
-  //  / .___/_/   \____/_/ /_/ /_/_/____/\___/____/  
-  // /_/                                             
-
-  // Later, we'll call gulp.start('asset-build') and 
-  // gulp.start('image-build'), which don't return promises. 
-  // These are just thin wrappers that makes the builds into deps, 
-  // and each resolves a promise in the global scope afterwards.
-  // 
-  // This is pretty silly and should be refactored.
-  gulp.task('asset-build-promise', ['asset-build'], function(){
-    assetsPromise.resolve();
-  });
-
-  gulp.task('images-promise', ['images'], function(){
-    imagesPromise.resolve();
-  });
 
   //     ____            __      
   //    / __/___  ____  / /______
@@ -234,7 +213,7 @@ module.exports.setup = function(config, outerGulp){
   // /_/  \____/_/ /_/\__/____/  
 
   // take fonts out of ghost-shield and move them to dist
-  gulp.task('fonts', function () {
+  gulp.task('fonts', ['clean'], function () {
     return gulp.src(config.fontDir)
       .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
       .pipe($.flatten())
@@ -250,7 +229,7 @@ module.exports.setup = function(config, outerGulp){
   // \___/_/ /_/\__,_/_/ /_/ /_/\___/ 
                                    
   // Copy the CNAME file over to dist
-  gulp.task('cname', function () {
+  gulp.task('cname', ['clean'], function () {
     return gulp.src(config.cname)
       .pipe(gulp.dest(config.distDir))
       .pipe($.size());
@@ -266,7 +245,7 @@ module.exports.setup = function(config, outerGulp){
 
   // After build-step-1 promise is resolved , we can
   // safely generate a sitemap and put it in dist
-  gulp.task('sitemap', function () {
+  gulp.task('sitemap', ['cname', 'use-ref', 'fonts'], function () {
     return gulp.src(config.sitemapDir, {
       read: false
     }).pipe($.sitemap({
@@ -276,42 +255,24 @@ module.exports.setup = function(config, outerGulp){
   });
 
 
-  //     __          _ __    __        __                 
-  //    / /_  __  __(_) /___/ /  _____/ /____  ____  _____
-  //   / __ \/ / / / / / __  /  / ___/ __/ _ \/ __ \/ ___/
-  //  / /_/ / /_/ / / / /_/ /  (__  ) /_/  __/ /_/ (__  ) 
-  // /_.___/\__,_/_/_/\__,_/  /____/\__/\___/ .___/____/  
-  //                                       /_/            
+  //         __               
+  //   _____/ /__  ____ _____ 
+  //  / ___/ / _ \/ __ `/ __ \
+  // / /__/ /  __/ /_/ / / / /
+  // \___/_/\___/\__,_/_/ /_/                            
 
   gulp.task('clean', function () {
     return gulp.src(config.cleanDir, { read: false }).pipe($.rimraf());
   });
+  
 
+  //     __          _ __    __             
+  //    / /_  __  __(_) /___/ /
+  //   / __ \/ / / / / / __  /
+  //  / /_/ / /_/ / / / /_/ /
+  // /_.___/\__,_/_/_/\__,_/    
 
-  // clean is a dependency of this task, but can't be run asynchronously 
-  // with the other nested tasks. This build task should ideally wait for 
-  // all tasks to complete, but because gulp.start doesn't return promises
-  // and I can only return one promise, I ended up splitting this into two tasks.
-  // asset-build and image-build are the two longest running task by far, so I'm
-  // only looking for those two promises to be resolved.
-  gulp.task('build-step-1', ['clean'], function(){
-
-
-    gulp.start('cname');
-    gulp.start('asset-build-promise');
-    gulp.start('fonts');
-    return assetsPromise.promise;
-
-  });
-
-  // this task depends on build-step-1 to complete
-  gulp.task('build-step-2', ['build-step-1'], function(){
-
-
-    gulp.start('sitemap');
-    gulp.start('images-promise');
-    return imagesPromise.promise;
-  });
+  gulp.task('build', ['cname', 'use-ref', 'fonts', 'sitemap', 'images']);
 
 
   //        __           __                                 __ 
@@ -326,7 +287,7 @@ module.exports.setup = function(config, outerGulp){
   // in dist and commits it to gh-pages and pushes.
   // 
   // deploy script from: https://github.com/X1011/git-directory-deploy
-  gulp.task('deploy', ['build-step-2'], function() {
+  gulp.task('deploy', ['build'], function() {
     var deployPromise = Q.defer();
     exec(config.deployCommand, function(err){
       deployPromise.resolve();
