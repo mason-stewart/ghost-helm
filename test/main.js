@@ -14,7 +14,7 @@ var expect = require("chai").expect,
     config = {
       distDir: 'test/.tmp-dist',
 
-      templatesDir: 'test/fixtures/templates/pages/**/*.jade',
+      templatesDir: 'test/fixtures/templates/pages/**/*',
       templatesBaseDir: 'test/fixtures/templates',
       templatesDistDir: 'test/.tmp',
 
@@ -45,9 +45,11 @@ var expect = require("chai").expect,
     expectedAboutContent,
     expectedIndexContent,
     expectedFaqContent,
+    expectedMarkdownContent,
     aboutContent,
     indexContent,
-    faqContent;
+    faqContent,
+    markdownContent;
 
 ghostHelm.setup(config, gulp);
 console.log('Ghost Helm is made possible by contributions from viewers like you.');
@@ -55,8 +57,9 @@ console.log('Ghost Helm is made possible by contributions from viewers like you.
 expectedAboutContent = fs.readFileSync('test/expected/about/index.html').toString();
 expectedIndexContent = fs.readFileSync('test/expected/index.html').toString();
 expectedFaqContent = fs.readFileSync('test/expected/academy/faq/index.html').toString();
+expectedMarkdownContent = fs.readFileSync('test/expected/markdown.html').toString();
 
-gulp.task('generate', ['deploy'], function(){
+gulp.task('generate', ['build'], function(){
   generateDeferred.resolve();
 });
 
@@ -69,6 +72,7 @@ before(function(done){
     aboutContent = fs.readFileSync('test/.tmp-dist/about/index.html').toString();
     indexContent = fs.readFileSync('test/.tmp-dist/index.html').toString();
     faqContent = fs.readFileSync('test/.tmp-dist/academy/faq/index.html').toString();
+    markdownContent = fs.readFileSync('test/.tmp-dist/markdown.html').toString();
     done();
   });
 
@@ -87,6 +91,10 @@ describe("Ghost Helm", function(){
 
     it("exactly match the expected content of the FAQ page", function(){
       expect(faqContent).to.equal(expectedFaqContent);
+    }); 
+
+    it("exactly match the expected content of the Markdown page", function(){
+      expect(markdownContent).to.equal(expectedMarkdownContent);
     }); 
   });
 });

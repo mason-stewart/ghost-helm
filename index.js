@@ -22,22 +22,12 @@ var gulp = require('gulp'),
     exec = require('child_process').exec,
     assign  = require("lodash.assign"),
     Q = require('q'),
-    // Asset compilation and image crunching
-    // are long-running tasks. I'm using two
-    // Q promises to relieve some pain.
-    assetsPromise = Q.defer(),
-    imagesPromise = Q.defer(),
-    // gulp-load-plugins will find modules in
-    // package.json that start with 'gulp-' and
-    // automatically load them into the $ object.
-    // Note that modules with dashes in the name
-    // become camelCase in $ object.
     $ = require('gulp-load-plugins')(),
     // the defaults
     defaults = {
       distDir: 'dist',
 
-      templatesDir: 'test/fixtures/templates/pages/**/*.jade',
+      templatesDir: 'test/fixtures/templates/pages/**/*',
       templatesBaseDir: 'test/fixtures/templates',
       templatesDistDir: 'test/.tmp',
 
@@ -71,21 +61,23 @@ module.exports.setup = function(config, outerGulp){
   config = assign(defaults, config);
 
 
-  //        _           __   
-  //       (_)___ _____/ /__ 
-  //      / / __ `/ __  / _ \
-  //     / / /_/ / /_/ /  __/
-  //  __/ /\__,_/\__,_/\___/ 
-  // /___/                   
+  //    __                       __      __           
+  //   / /____  ____ ___  ____  / /___ _/ /____  _____
+  //  / __/ _ \/ __ `__ \/ __ \/ / __ `/ __/ _ \/ ___/
+  // / /_/  __/ / / / / / /_/ / / /_/ / /_/  __(__  ) 
+  // \__/\___/_/ /_/ /_/ .___/_/\__,_/\__/\___/____/  
+  //                  /_/                             
 
-  // Let's take all of the jade templates, pre-process them,
+  // Let's take all of the jade templates and markdown files, pre-process them,
   // and story them in .tmp
   gulp.task('templates', ['clean'], function() {
     return gulp.src(config.templatesDir)
-    .pipe($.jade({
-      basedir: config.templatesBaseDir,
-      pretty: true
-    }))
+    .pipe($.if('**/*.jade', $.jade({
+        basedir: config.templatesBaseDir,
+        pretty: true
+      })))
+    .pipe($.if('**/*.md', $.markdown()))
+
     .pipe(gulp.dest(config.templatesDistDir));
   });
 

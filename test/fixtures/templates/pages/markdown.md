@@ -1,0 +1,3 @@
+# Cool Idea
+
+Awesome.
