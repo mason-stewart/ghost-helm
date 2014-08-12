@@ -22,14 +22,35 @@ var gulp = require('gulp'),
     exec = require('child_process').exec,
     assign  = require("lodash.assign"),
     Q = require('q'),
-    $ = require('gulp-load-plugins')(),
+    autoprefixer = require("gulp-autoprefixer"),
+    cache = require("gulp-cache"),
+    csso = require("gulp-csso"),
+    filter = require("gulp-filter"),
+    flatten = require("gulp-flatten"),
+    gulpIf = require("gulp-if"),
+    imagemin = require("gulp-imagemin"),
+    jade = require("gulp-jade"),
+    jshint = require("gulp-jshint"),
+    jshintStylish = require("jshint-stylish"),
+    livereload = require("gulp-livereload"),
+    markdown = require("gulp-markdown"),
+    mocha = require("gulp-mocha"),
+    plumber = require("gulp-plumber"),
+    print = require("gulp-print"),
+    rimraf = require("gulp-rimraf"),
+    sass = require("gulp-sass"),
+    sitemap = require("gulp-sitemap"),
+    size = require("gulp-size"),
+    uglify = require("gulp-uglify"),
+    useref = require("gulp-useref"),
+    util = require("gulp-util"),
     // the defaults
     defaults = {
       distDir: 'dist',
 
-      templatesDir: 'test/fixtures/templates/pages/**/*',
-      templatesBaseDir: 'test/fixtures/templates',
-      templatesDistDir: 'test/.tmp',
+      templatesDir: 'app/templates/pages/**/*',
+      templatesBaseDir: 'app/templates',
+      templatesDistDir: '.tmp',
 
       stylesDir: 'app/styles/main.scss',
       stylesDistDir: '.tmp/styles',
@@ -72,11 +93,11 @@ module.exports.setup = function(config, outerGulp){
   // and story them in .tmp
   gulp.task('templates', ['clean'], function() {
     return gulp.src(config.templatesDir)
-    .pipe($.if('**/*.jade', $.jade({
+    .pipe(gulpIf('**/*.jade', jade({
         basedir: config.templatesBaseDir,
         pretty: true
       })))
-    .pipe($.if('**/*.md', $.markdown()))
+    .pipe(gulpIf('**/*.md', markdown()))
 
     .pipe(gulp.dest(config.templatesDistDir));
   });
@@ -93,7 +114,7 @@ module.exports.setup = function(config, outerGulp){
   // in app/styles/main.scss and put them .tmp/styles
   gulp.task('styles', ['clean'], function () {
     return gulp.src(config.stylesDir)
-      .pipe($.sass({
+      .pipe(sass({
         // gulp-sass was blowing up without the next two line
         sourceComments: 'map', 
         sourceMap: 'sass', 
@@ -101,9 +122,9 @@ module.exports.setup = function(config, outerGulp){
         // include boubon (for local styles only)
         includePaths: require('node-bourbon').includePaths 
       }))
-      .pipe($.autoprefixer('last 1 version'))
+      .pipe(autoprefixer('last 1 version'))
       .pipe(gulp.dest(config.stylesDistDir))
-      .pipe($.size());
+      .pipe(size());
   });
 
   //        _     
@@ -117,9 +138,9 @@ module.exports.setup = function(config, outerGulp){
   // Don't move the files though. We'll do that later.
   gulp.task('scripts', ['clean'], function () {
     return gulp.src(config.jsDir)
-      .pipe($.jshint())
-      .pipe($.jshint.reporter($.jshintStylish))
-      .pipe($.size());
+      .pipe(jshint())
+      .pipe(jshint.reporter(jshintStylish))
+      .pipe(size());
   });
 
 
@@ -157,23 +178,23 @@ module.exports.setup = function(config, outerGulp){
 
       // useref all the html, and look in app and .tmp
       // for files references in the html
-      .pipe($.useref.assets({
+      .pipe(useref.assets({
         searchPath: config.userefSearchPath
       }))
 
 
       // uglify if it's js, optimize if it's css
-      .pipe($.if('**/*.js', $.uglify()))
-      .pipe($.if('**/*.css', $.csso()))
+      .pipe(gulpIf('**/*.js', uglify()))
+      .pipe(gulpIf('**/*.css', csso()))
       
       // useref requires a call to restore() and useref()
       // when you're done
-      .pipe($.useref.restore())
-      .pipe($.useref())
+      .pipe(useref.restore())
+      .pipe(useref())
 
       // throw it all into dist
       .pipe(gulp.dest(config.distDir))
-      .pipe($.size());
+      .pipe(size());
   });
 
 
@@ -188,13 +209,13 @@ module.exports.setup = function(config, outerGulp){
   // optimize them and put them in dist/images
   gulp.task('images', ['cname', 'use-ref', 'fonts'],  function () {
     return gulp.src(config.imagesDir)
-      // .pipe($.cache($.imagemin({
+      // .pipe(cache(imagemin({
       //   optimizationLevel: 3,
       //   progressive: true,
       //   interlaced: true
       // })))
       .pipe(gulp.dest(config.imagesDistDir))
-      .pipe($.size());
+      .pipe(size());
   });
 
 
@@ -207,10 +228,10 @@ module.exports.setup = function(config, outerGulp){
   // take fonts out of ghost-shield and move them to dist
   gulp.task('fonts', ['clean'], function () {
     return gulp.src(config.fontDir)
-      .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-      .pipe($.flatten())
+      .pipe(filter('**/*.{eot,svg,ttf,woff}'))
+      .pipe(flatten())
       .pipe(gulp.dest('dist/styles'))
-      .pipe($.size());
+      .pipe(size());
   });
 
 
@@ -224,7 +245,7 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('cname', ['clean'], function () {
     return gulp.src(config.cname)
       .pipe(gulp.dest(config.distDir))
-      .pipe($.size());
+      .pipe(size());
   });
 
 
@@ -240,7 +261,7 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('sitemap', ['cname', 'use-ref', 'fonts'], function () {
     return gulp.src(config.sitemapDir, {
       read: false
-    }).pipe($.sitemap({
+    }).pipe(sitemap({
         siteUrl: config.siteUrl
     }))
     .pipe(gulp.dest(config.distDir));
@@ -254,7 +275,7 @@ module.exports.setup = function(config, outerGulp){
   // \___/_/\___/\__,_/_/ /_/                            
 
   gulp.task('clean', function () {
-    return gulp.src(config.cleanDir, { read: false }).pipe($.rimraf());
+    return gulp.src(config.cleanDir, { read: false }).pipe(rimraf());
   });
   
 
@@ -319,7 +340,7 @@ module.exports.setup = function(config, outerGulp){
   });
 
   gulp.task('watch', ['connect', 'serve'], function () {
-    var server = $.livereload();
+    var server = livereload();
 
     // watch for changes
 

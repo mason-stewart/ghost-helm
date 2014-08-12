@@ -2,15 +2,22 @@
 
 'use strict';
 
-var ghostHelm = require('./ghost-helm');
+var ghostHelm = require('./'),
+    gulp = require('gulp'),
+    exec = require('child_process').exec;
 
 var userArgs = process.argv;
 var searchParam = userArgs[2];
 
 if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1 || searchParam === undefined) {
-    return console.log('cli help');
+  return console.log('cli help');
 }
 
 if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
-    return console.log(require('./package').version);
+  return console.log(require('./package').version);
+}
+
+if (userArgs.indexOf('build') !== -1) {
+  ghostHelm.setup({}, gulp);
+  return gulp.start('build');
 }
