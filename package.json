@@ -15,9 +15,6 @@
     "url": "https://github.com/masondesu/ghost-helm"
   },
   "license": "MIT",
-  "files": [
-    "lib"
-  ],
   "keywords": [
     "ghost-helm"
   ],
