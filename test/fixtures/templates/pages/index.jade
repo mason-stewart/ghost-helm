@@ -3,115 +3,27 @@ extends /layouts/main
 
 block meta
   +meta({
-    title: 'Welcome to The Iron Yard',
-    description: "We run an intensive code school, a startup accelerator, kids\'s programming classes, and organize tech conferences and events."
+    title: 'Welcome to a Test Suite',
+    description: "It's cool."
   })
 
 block content
   +navigation({
     color: 'gray-dark',
     title: '',
-    image: '/images/home/home-hero.jpg',
+    image: '/abc.jpg',
     triangle: false,
     gradient: false,
     home: true
   })
   .container-fluid
-    .row
-      .col-md-8.col-md-offset-2.col-xs-12
-        h1 Welcome to The Iron Yard
-        p We are committed to training the highest-quality developers and startups in the world, both in skill and in character. Our mission is to find people who want to pursue the craft and life-long adventure of technology, teach them the tools of the trade, and then release them into the world with the drive and capability to make a difference. We believe that passionate, talented people who love what they do will create great families, jobs, companies and solutions to the world’s problems. 
+    p Super!
 
   +photoBar({
-    title: 'Intensive Code School',
-    photo: '/images/home/home-academy.jpg'
+    title: 'Blah',
+    photo: '123.jpg'
   })
 
   .container-fluid
     .row
-      .col-md-6.col-md-offset-2.col-xs-12
-        a(style="text-decoration:none; color:#39474e"): h3 Learn to code. <br>Life's too short for the wrong career. 
-        p(style="margin-bottom: 0px;") The Iron Yard Academy teaches intensive, three-month courses that mentor you into a professional junior-level programmer. Our program goes far beyond tactical skills and teaches you to think like a software engineer. Programming is a lifelong study, and our process shows you to learn how to learn so you remain highly valuable for the rest of your career.
-      .col-md-2.col-xs-12(style="padding-top: 45px;") 
-        a(href="/academy").btn Learn More
-        p
-          | <em>We offer courses in cities across the country. Find a school in a city near you.</em>
-      .col-md-8.col-md-offset-2.col-xs-12
-        hr
-        .row(style="margin-top: 30px;")
-          .col-md-6(style="margin-bottom: 30px;")
-            h4(style="padding-bottom: 0px;"): a(href="/academy/front-end-engineering").green-text <img src="/images/locations/icons/web-design-icon.png" style="height:24px"> <strong>Web Design</strong>
-            p Learn Web Design from the ground up, including ideation, UI and UX design, front-end code and a whole lot more. At the end of class you'll have the skills to understand and add value in almost any digital design role.
-            a(href="/academy/web-design").btn.hover-purple Learn More
-          .col-md-6(style="margin-bottom: 30px;") 
-            h4(style="padding-bottom: 0px;"): a(href="/academy/mobile-engineering").green-text <img src="/images/locations/icons/mobile-icon.png" style="height:24px"> <strong>Mobile Engineering</strong>
-            p Learn iOS app development using Xcode 5 and a whole lot of Objective-C. At the end of the class you’ll have the skills to create beautiful, fully functional iOS apps and the foundation to pursue building Mac apps.
-            a(href="/academy/mobile-engineering").btn.hover-blue Learn More
-
-        .row(style="margin-top: 30px;")                
-          .col-md-6(style="margin-bottom: 30px;")
-            h4(style="padding-bottom: 0px;"): a(href="/academy/front-end-engineering").green-text <img src="/images/locations/icons/js-icon.png" style="height:24px"> <strong>Front End Engineering</strong>
-            p Learn to build in-browser apps in the Front End Engineering program using HTML, CSS and JavaScript and basic server-side tech. At the end of the class you’ll have the skills to create beautiful, fully functional websites and web applications.
-            a(href="/academy/front-end-engineering").btn.hover-yellow Learn More
-          .col-md-6(style="margin-bottom: 30px;")
-            h4(style="padding-bottom: 0px;"): a(href="/academy/rails-engineering").green-text <img src="/images/locations/icons/rails-icon.png" style="height:24px"> <strong>Rails Engineering</strong>
-            p Learn Ruby on Rails, one of the most popular server-side frameworks in the world. At the end of class you’ll know how to build rock-solid servers, manage databases and know the basics of front end app development.
-            a(href="/academy/rails-engineering").btn.hover-red Learn More
-
-
-
-  +photoBar({
-    title: 'Startup Accelerator',
-    photo: '/images/home/home-accelerator.jpg'
-  })
-
-  .container-fluid 
-    .row(style='margin-bottom: 60px;')
-      .col-md-6.col-md-offset-2.col-xs-12
-        a(style="text-decoration:none; color:#39474e"): h3 We’re interested in building strong, sustainable businesses that add real value to customers' lives.
-        p(style="margin-bottom: 0px;") Speaking the same language? We’d love for you to join us. Whether your goal is a Series A round, building a team and bootstrapping, or utilizing Kickstarter, we have a place for you. We run three programs a year, a digital health program and an open tech program and a green tech program.
-      .col-md-2.col-xs-12(style="padding-top: 45px;")  
-        a(href="/accelerator").btn Learn More
-        p
-          | <em>We run mentorship-driven programs focused on Digital Health, Green Tech and Education.</em>
-
-  +photoBar({
-    title: 'Kids Education',
-    photo: '/images/home/home-kids.jpg'
-  })
-
-  .container-fluid
-    .row(style='margin-bottom: 60px;')
-      .col-md-6.col-md-offset-2.col-xs-12
-        a(style="text-decoration:none; color:#39474e"): h3 We believe in investing in the local tech economy for the long-run
-        p(style="margin-bottom: 0px;") ...and that means impacting the next generation. Students in our intensive courses are required to volunteer, teach and run our Kids programs as a part of their involvement in the Academy. (Not only does this develop a giving mindset, but it helps them communicate things they’ve learned—an essential skill as they grow into management positions in their careers.)
-      .col-md-2.col-xs-12(style="padding-top: 45px;")  
-        a(href="/academy#kids").btn Learn More
-        p
-          | <em>Our kids classes range from Scratch and Minecraft to building websites. Find classes in a city near you.</em>  
-  
-  +photoBar({
-    title: 'Events',
-    photo: '/images/home/home-events.jpg'
-  })
-
-  .container-fluid
-    .row(style='margin-bottom: 60px;')
-      .col-md-6.col-md-offset-2.col-xs-12
-        a(style="text-decoration:none; color:#39474e" href="/events"): h3 We've partnered with Unmatched Style to offer some of the finest design and development events in the country. 
-        p(style="margin-bottom: 0px;") The world doesn't need more conferences, it needs <em>better</em> conferences. We produce high quality events that are worth every dollar you spend on them. Join us for nationally-renowned gatherings like <a href="/events/grok">Grok</a>, <a href="http://unmatchedstyle.com/events">Converge</a> and the brand new <a href="http://outlinesconf.education">Outlines Education conference</a>. 
-      .col-md-2.col-xs-12(style="padding-top: 45px;")  
-        a(href="/events").btn Learn More
-        p
-          | <em>From South Carolina to Las Vegas, we bring top brass and young talent together to learn, converse and have a whole lotta fun.</em>
-   
-    .row
-      .horizontal-section.gray-light-bg.last
-        .container
-            .row
-              .col-md-12
-                .callout-box(style="margin-bottom:0")
-                  h2 Who We Are
-                  hr
-                  p(style="margin-bottom:0") The Iron Yard exists to create exceptional value for people and their ideas through code education, startup accelerators and coworking spaces. Through our broad, deep and growing network of teachers, programmers, designers, entrepreneurs, investors, employers and coworking spaces we have developed a thriving community where serendipity happens en-masse.
-
+      h2 Beer!
