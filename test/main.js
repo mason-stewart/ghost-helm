@@ -41,7 +41,7 @@ var expect = require("chai").expect,
       // deployCommand: 'sh deploy.sh',
       deployCommand: 'ls',
 
-      urlsPath: 'test/urls.json',
+      urlsPath: 'urls.json',
       sidebar: 'test/.tmp/sidebar.html',
       sidebarTemplate: 'test/fixtures/templates/includes/sidebar.jade',
 

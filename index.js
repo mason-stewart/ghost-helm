@@ -50,6 +50,7 @@ var gulp = require('gulp'),
     util = require("gulp-util"),
     fs = require('fs'),
     es = require('event-stream'),
+    path = require('path'),
     // the defaults
     defaults = {
       distDir: 'dist',
@@ -106,15 +107,14 @@ module.exports.setup = function(config, outerGulp){
       .pipe(directoryMap({
         filename: config.urlsPath
       }))
-      // fix this... directoryMap 0.0.1 ignores the dest path :(
-      .pipe(gulp.dest('somethingsomething/dangerzone'));
+      .pipe(gulp.dest(config.distDir));
   });
 
   gulp.task('sidebar', ['generate-urls'], function(){
     return gulp.src(config.sidebarTemplate)
       .pipe(jade({
         basedir: 'app',
-        data: {urls: JSON.parse(fs.readFileSync(config.urlsPath, 'utf8'))}
+        data: {urls: JSON.parse(fs.readFileSync(path.join(config.distDir, config.urlsPath), 'utf8'))}
       }))
       .pipe(gulp.dest(config.templatesDistDir))
       .on('error', gutil.log);

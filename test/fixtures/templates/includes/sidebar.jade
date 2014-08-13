@@ -2,7 +2,6 @@ mixin spacify(thing)
   = thing.replace(/-/g, ' ').replace('.html', '')
 
 mixin makeLinks(index, thing)
-  - console.log('thing is ', thing)
   if typeof(thing) === 'string'
     li
       a(href=thing)
