@@ -1,0 +1,22 @@
+mixin spacify(thing)
+  = thing.replace(/-/g, ' ').replace('.html', '')
+
+mixin makeLinks(index, thing)
+  - console.log('thing is ', thing)
+  if typeof(thing) === 'string'
+    li
+      a(href=thing)
+        +spacify(index)
+  else if typeof(thing) === 'object'
+    ul
+      if thing 
+        if thing['index.html']
+          +makeLinks(index, thing['index.html'])
+          - delete thing['index.html']
+
+        each subthing, subindex in thing
+          +makeLinks(subindex, subthing)
+
++makeLinks("Ghost Ring", urls)
+
+p end sidebar

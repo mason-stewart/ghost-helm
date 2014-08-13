@@ -40,16 +40,22 @@ var expect = require("chai").expect,
 
       // deployCommand: 'sh deploy.sh',
       deployCommand: 'ls',
+
+      urlsPath: 'test/urls.json',
+      sidebar: 'test/.tmp/sidebar.html',
+      sidebarTemplate: 'test/fixtures/templates/includes/sidebar.jade'
     },
 
     expectedAboutContent,
     expectedIndexContent,
     expectedFaqContent,
     expectedMarkdownContent,
+    expectedSidebarTestContent,
     aboutContent,
     indexContent,
     faqContent,
-    markdownContent;
+    markdownContent,
+    sidebarTestContent;
 
 ghostHelm.setup(config, gulp);
 console.log('Ghost Helm is made possible by contributions from viewers like you.');
@@ -58,6 +64,7 @@ expectedAboutContent = fs.readFileSync('test/expected/about/index.html').toStrin
 expectedIndexContent = fs.readFileSync('test/expected/index.html').toString();
 expectedFaqContent = fs.readFileSync('test/expected/academy/faq/index.html').toString();
 expectedMarkdownContent = fs.readFileSync('test/expected/markdown.html').toString();
+expectedSidebarTestContent = fs.readFileSync('test/expected/sidebar-test.html').toString();
 
 gulp.task('generate', ['build'], function(){
   generateDeferred.resolve();
@@ -73,6 +80,7 @@ before(function(done){
     indexContent = fs.readFileSync('test/.tmp-dist/index.html').toString();
     faqContent = fs.readFileSync('test/.tmp-dist/academy/faq/index.html').toString();
     markdownContent = fs.readFileSync('test/.tmp-dist/markdown.html').toString();
+    sidebarTestContent = fs.readFileSync('test/.tmp-dist/sidebar-test.html').toString();
     done();
   });
 
@@ -96,5 +104,11 @@ describe("Ghost Helm", function(){
     it("exactly match the expected content of the Markdown page", function(){
       expect(markdownContent).to.equal(expectedMarkdownContent);
     }); 
+  });
+
+  describe("should be able to correctly generate and inject sidebars", function() {
+    it("on the sidebar-test page", function(){
+      expect(sidebarTestContent).to.equal(expectedSidebarTestContent);
+    });
   });
 });

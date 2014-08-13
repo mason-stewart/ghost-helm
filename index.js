@@ -18,6 +18,7 @@
 //              /_/                          
 
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
     exec = require('child_process').exec,
     assign  = require("lodash.assign"),
@@ -25,10 +26,12 @@ var gulp = require('gulp'),
     autoprefixer = require("gulp-autoprefixer"),
     cache = require("gulp-cache"),
     csso = require("gulp-csso"),
+    directoryMap = require('gulp-directory-map'),
     filter = require("gulp-filter"),
     flatten = require("gulp-flatten"),
     gulpIf = require("gulp-if"),
     imagemin = require("gulp-imagemin"),
+    inject = require("gulp-inject"),
     jade = require("gulp-jade"),
     jshint = require("gulp-jshint"),
     jshintStylish = require("jshint-stylish"),
@@ -44,6 +47,7 @@ var gulp = require('gulp'),
     uglify = require("gulp-uglify"),
     useref = require("gulp-useref"),
     util = require("gulp-util"),
+    fs = require('fs'),
     // the defaults
     defaults = {
       distDir: 'dist',
@@ -74,12 +78,57 @@ var gulp = require('gulp'),
 
       // deployCommand: 'sh deploy.sh',
       deployCommand: 'ls',
+
+      urlsPath: 'urls.json',
+      sidebar: '.tmp/sidebar.html',
+      sidebarTemplate: 'app/templates/includes/sidebar.jade'
     };
 
 module.exports.setup = function(config, outerGulp){
   // Overrite defaults with user config properties
   config = config || {};
   config = assign(defaults, config);
+
+
+  //          _     __     __              
+  //    _____(_)___/ /__  / /_  ____ ______
+  //   / ___/ / __  / _ \/ __ \/ __ `/ ___/
+  //  (__  ) / /_/ /  __/ /_/ / /_/ / /    
+  // /____/_/\__,_/\___/_.___/\__,_/_/     
+
+  gulp.task('generate-urls', ['sitemap'], function(){
+    return gulp.src(config.distDir + '/**/*.html')
+      .pipe(print())
+      .pipe(directoryMap({
+        filename: config.urlsPath
+      }))
+      // fix this... directoryMap 0.0.1 ignores the dest path :(
+      .pipe(gulp.dest('somethingsomething/dangerzone'));
+  });
+
+  gulp.task('sidebar', ['generate-urls'], function(){
+    return gulp.src(config.sidebarTemplate)
+      .pipe(jade({
+        basedir: 'app',
+        data: {urls: JSON.parse(fs.readFileSync(config.urlsPath, 'utf8'))}
+      }))
+      .pipe(gulp.dest(config.templatesDistDir))
+      .on('error', gutil.log);
+  });
+
+  gulp.task('inject-sidebar', ['sidebar'], function(){
+    return gulp.src(config.distDir + '/**/*.html')
+      // this does not appear to be working
+      .pipe(inject(gulp.src(config.sidebar), {
+        name: 'sidebar',
+        transform: function (filePath, file) {
+          // return file contents as string
+          return file.contents.toString('utf8')
+        }
+      }))
+      .pipe(gulp.dest(config.distDir))
+      .on('error', gutil.log);
+  });
 
 
   //    __                       __      __           
@@ -285,7 +334,7 @@ module.exports.setup = function(config, outerGulp){
   //  / /_/ / /_/ / / / /_/ /
   // /_.___/\__,_/_/_/\__,_/    
 
-  gulp.task('build', ['cname', 'use-ref', 'fonts', 'sitemap', 'images']);
+  gulp.task('build', ['cname', 'use-ref', 'fonts', 'inject-sidebar', 'images']);
 
 
   //        __           __                                 __ 
@@ -321,7 +370,6 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('connect', function () {
     var connect = require('connect');
     var app = connect()
-      .use(require('connect-livereload')({ port: 35729 }))
       .use(connect.static('app'))
       // look in ghost shield too! XD
       .use(connect.static('app/bower_components/ghost-shield/dist'))
@@ -341,24 +389,23 @@ module.exports.setup = function(config, outerGulp){
 
   gulp.task('watch', ['connect', 'serve'], function () {
     var server = livereload();
-
     // watch for changes
 
     gulp.watch([
-      '.tmp/templates/**/*.jade',
+      '.tmp/**/*.html',
       'app/*.html',
       '.tmp/styles/**/*.*',
       'app/scripts/**/*.js',
       'app/images/**/*'
     ]).on('change', function (file) {
+      console.log('wow')
       server.changed(file.path);
     });
 
-    gulp.watch('app/templates/**/*.jade', ['templates']);
+    gulp.watch('app/templates/**/*', ['templates']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
-    gulp.watch('bower.json', ['wiredep']);
   });
 
   outerGulp.tasks = assign({}, gulp.tasks, outerGulp.tasks);
