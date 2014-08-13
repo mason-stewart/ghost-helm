@@ -14,7 +14,7 @@ var expect = require("chai").expect,
     config = {
       distDir: 'test/.tmp-dist',
 
-      templatesDir: 'test/fixtures/templates/pages/**/*',
+      templatesDir: 'test/fixtures/templates/pages',
       templatesBaseDir: 'test/fixtures/templates',
       templatesDistDir: 'test/.tmp',
 
@@ -43,7 +43,9 @@ var expect = require("chai").expect,
 
       urlsPath: 'test/urls.json',
       sidebar: 'test/.tmp/sidebar.html',
-      sidebarTemplate: 'test/fixtures/templates/includes/sidebar.jade'
+      sidebarTemplate: 'test/fixtures/templates/includes/sidebar.jade',
+
+      markdownLayout: 'test/fixtures/templates/layouts/markdown-layout.jade'
     },
 
     expectedAboutContent,
@@ -73,7 +75,7 @@ gulp.task('generate', ['build'], function(){
 gulp.start('generate');
 
 before(function(done){
-  this.timeout(60000)
+  this.timeout(5000)
 
   generateDeferred.promise.then(function () {
     aboutContent = fs.readFileSync('test/.tmp-dist/about/index.html').toString();

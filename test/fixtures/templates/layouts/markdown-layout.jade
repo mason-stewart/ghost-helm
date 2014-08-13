@@ -1,0 +1,15 @@
+include /mixins/navigation
+include /mixins/meta
+
+doctype html
+html
+  head
+    block meta
+    include /includes/head
+
+  //- Your cool stuff here.
+  body
+    | !{content}
+    include /includes/footer
+    include /includes/closing-scripts
+    block scripts

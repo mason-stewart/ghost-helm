@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "connect": "^2.14.4",
+    "event-stream": "^3.1.7",
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "^0.0.6",
     "gulp-cache": "^0.1.1",
@@ -44,6 +45,7 @@
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.5.0",
     "gulp-util": "^3.0.0",
+    "jade": "^1.5.0",
     "jshint-stylish": "^0.2.0",
     "lodash.assign": "^2.4.1",
     "node-bourbon": "^1.2.3",

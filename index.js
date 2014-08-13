@@ -32,6 +32,7 @@ var gulp = require('gulp'),
     gulpIf = require("gulp-if"),
     imagemin = require("gulp-imagemin"),
     inject = require("gulp-inject"),
+    jadeEngine = require("jade"),
     jade = require("gulp-jade"),
     jshint = require("gulp-jshint"),
     jshintStylish = require("jshint-stylish"),
@@ -48,11 +49,12 @@ var gulp = require('gulp'),
     useref = require("gulp-useref"),
     util = require("gulp-util"),
     fs = require('fs'),
+    es = require('event-stream'),
     // the defaults
     defaults = {
       distDir: 'dist',
 
-      templatesDir: 'app/templates/pages/**/*',
+      templatesDir: 'app/templates/pages',
       templatesBaseDir: 'app/templates',
       templatesDistDir: '.tmp',
 
@@ -81,7 +83,9 @@ var gulp = require('gulp'),
 
       urlsPath: 'urls.json',
       sidebar: '.tmp/sidebar.html',
-      sidebarTemplate: 'app/templates/includes/sidebar.jade'
+      sidebarTemplate: 'app/templates/includes/sidebar.jade',
+
+      markdownLayout: 'app/templates/layouts/markdown-layout.jade'
     };
 
 module.exports.setup = function(config, outerGulp){
@@ -140,15 +144,38 @@ module.exports.setup = function(config, outerGulp){
 
   // Let's take all of the jade templates and markdown files, pre-process them,
   // and story them in .tmp
-  gulp.task('templates', ['clean'], function() {
-    return gulp.src(config.templatesDir)
-    .pipe(gulpIf('**/*.jade', jade({
-        basedir: config.templatesBaseDir,
-        pretty: true
-      })))
-    .pipe(gulpIf('**/*.md', markdown()))
+  gulp.task('jade', ['clean'], function(){
+    return gulp.src(config.templatesDir + '/**/*.jade')
+      .pipe(jade({
+          basedir: config.templatesBaseDir,
+          pretty: true
+        }))
+      .pipe(gulp.dest(config.templatesDistDir));
 
-    .pipe(gulp.dest(config.templatesDistDir));
+  });
+
+  gulp.task('markdown', ['clean'], function(){
+    return gulp.src(config.templatesDir + '/**/*.md')
+      .pipe(markdown())
+      .pipe(es.map(function(file, cb) {
+
+        var html = jadeEngine.renderFile(config.markdownLayout, {
+          basedir: config.templatesBaseDir,
+          pretty: true,
+            content: file.contents.toString('utf8')
+          
+        });
+        file.contents = new Buffer(html);
+        cb(null, file);
+      }))
+      .pipe(gulp.dest(config.templatesDistDir));
+  })
+
+
+  gulp.task('templates', ['jade', 'markdown'], function(){
+    return gulp.src(config.templatesDir + '/**/*.html')
+      .pipe(gulp.dest(config.templatesDistDir));
+
   });
 
 
@@ -398,7 +425,6 @@ module.exports.setup = function(config, outerGulp){
       'app/scripts/**/*.js',
       'app/images/**/*'
     ]).on('change', function (file) {
-      console.log('wow')
       server.changed(file.path);
     });
 

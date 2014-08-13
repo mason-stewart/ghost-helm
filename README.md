@@ -28,6 +28,8 @@ ghostHelm.setup({}, gulp);
 Ghost Helm can be used in a few different ways. After calling `ghostHelm.setup`, you can refer to the built in tasks as you would any other gulp task. The built in tasks are:
 
 * `templates`
+* `jade`
+* `markdown`
 * `styles`
 * `scripts`
 * `images`
@@ -47,6 +49,12 @@ If you're happy with the defaults, the command `ghost-helm build` will simplly p
 ```sh
 $ npm install -g ghost-helm
 $ ghost-helm build
+```
+
+You can also run any ghost-helm gulp task from the command line with `ghost-helm run <command>`. For example for local development, you can run:
+
+```sh
+$ ghost-helm run watch
 ```
 
 
