@@ -1,6 +1,8 @@
 /node_modules/
 npm-debug.log
 .DS_Store
+.tmp
 test/.tmp
 test/.tmp-dist
+test/urls.json
 dist
