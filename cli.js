@@ -21,3 +21,8 @@ if (userArgs.indexOf('build') !== -1) {
   ghostHelm.setup({}, gulp);
   return gulp.start('build');
 }
+
+if (userArgs[2] == 'run' && userArgs[3] !== undefined) {
+  ghostHelm.setup({}, gulp);
+  return gulp.start(userArgs[3]);
+}
