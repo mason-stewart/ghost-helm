@@ -17,7 +17,8 @@
 // /_/   \___/\__, /\__,_/_/_/   \___/____/  
 //              /_/                          
 
-var gulp = require('gulp'),
+var packageJSON = require(process.cwd() + '/package.json'),
+    gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
     exec = require('child_process').exec,
@@ -105,7 +106,8 @@ module.exports.setup = function(config, outerGulp){
     return gulp.src(config.distDir + '/**/*.html')
       .pipe(print())
       .pipe(directoryMap({
-        filename: config.urlsPath
+        filename: config.urlsPath,
+        prefix: process.env.NODE_ENV === 'production' ? packageJSON.name : ''
       }))
       .pipe(gulp.dest(config.distDir));
   });
@@ -400,7 +402,7 @@ module.exports.setup = function(config, outerGulp){
       .use(connect.static('app'))
       // look in ghost shield too! XD
       .use(connect.static('app/bower_components/ghost-shield/dist'))
-      .use(connect.static('.tmp'))
+      .use(connect.static('dist'))
       .use(connect.directory('app'));
 
     require('http').createServer(app)
@@ -410,7 +412,7 @@ module.exports.setup = function(config, outerGulp){
       });
   });
 
-  gulp.task('serve', ['connect', 'styles', 'templates'], function () {
+  gulp.task('serve', ['connect', 'styles', 'inject-sidebar'], function () {
     require('opn')('http://0.0.0.0:9000');
   });
 
@@ -428,7 +430,7 @@ module.exports.setup = function(config, outerGulp){
       server.changed(file.path);
     });
 
-    gulp.watch('app/templates/**/*', ['templates']);
+    gulp.watch('app/templates/**/*', ['inject-sidebar']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
