@@ -37,6 +37,7 @@
     "gulp-markdown": "^0.2.0",
     "gulp-mocha": "^0.5.2",
     "gulp-plumber": "^0.6.3",
+    "gulp-prefix": "0.0.10",
     "gulp-print": "^1.1.0",
     "gulp-rimraf": "^0.1.0",
     "gulp-sass": "^0.7.2",

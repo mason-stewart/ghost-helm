@@ -41,6 +41,7 @@ var packageJSON = require(process.cwd() + '/package.json'),
     markdown = require("gulp-markdown"),
     mocha = require("gulp-mocha"),
     plumber = require("gulp-plumber"),
+    prefix = require('gulp-prefix'),
     print = require("gulp-print"),
     rimraf = require("gulp-rimraf"),
     sass = require("gulp-sass"),
@@ -355,7 +356,23 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('clean', function () {
     return gulp.src(config.cleanDir, { read: false }).pipe(rimraf());
   });
-  
+
+
+  //                      _____                       __    
+  //     ____  ________  / __(_)  __      __  _______/ /____
+  //    / __ \/ ___/ _ \/ /_/ / |/_/_____/ / / / ___/ / ___/
+  //   / /_/ / /  /  __/ __/ />  </_____/ /_/ / /  / (__  ) 
+  //  / .___/_/   \___/_/ /_/_/|_|      \__,_/_/  /_/____/  
+  // /_/                                                    
+
+  gulp.task('prefix-urls', ['cname', 'use-ref', 'fonts', 'inject-sidebar'], function(){
+    var prefixUrl = "http://swayze.io/" + packageJSON.name;
+
+    gulp.src(config.distDir + '/**/*.html')
+      .pipe(prefix(prefixUrl, null, true))
+      .pipe(gulp.dest(config.distDir));
+  });
+
 
   //     __          _ __    __             
   //    / /_  __  __(_) /___/ /
@@ -363,7 +380,7 @@ module.exports.setup = function(config, outerGulp){
   //  / /_/ / /_/ / / / /_/ /
   // /_.___/\__,_/_/_/\__,_/    
 
-  gulp.task('build', ['cname', 'use-ref', 'fonts', 'inject-sidebar', 'images']);
+  gulp.task('build', ['cname', 'use-ref', 'fonts', 'inject-sidebar', 'images', 'prefix-urls']);
 
 
   //        __           __                                 __ 
