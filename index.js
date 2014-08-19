@@ -368,7 +368,7 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('prefix-urls', ['cname', 'use-ref', 'fonts', 'inject-sidebar'], function(){
     var prefixUrl = "http://swayze.io/" + packageJSON.name;
 
-    gulp.src(config.distDir + '/**/*.html')
+    return gulp.src(config.distDir + '/**/*.html')
       .pipe(prefix(prefixUrl, null, true))
       .pipe(gulp.dest(config.distDir));
   });
