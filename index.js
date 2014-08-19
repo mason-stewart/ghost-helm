@@ -114,10 +114,16 @@ module.exports.setup = function(config, outerGulp){
   });
 
   gulp.task('sidebar', ['generate-urls'], function(){
+    // note.. this is dumb. namespacing logic needs to be replaced with a modified version of gulp-prefix
+    if (process.env.NODE_ENV === 'production')
+      var formattedJSON = JSON.parse(fs.readFileSync(path.join(config.distDir, config.urlsPath), 'utf8'))[packageJSON.name]
+    else
+      var formattedJSON = JSON.parse(fs.readFileSync(path.join(config.distDir, config.urlsPath), 'utf8'))
+
     return gulp.src(config.sidebarTemplate)
       .pipe(jade({
         basedir: 'app',
-        data: {urls: JSON.parse(fs.readFileSync(path.join(config.distDir, config.urlsPath), 'utf8'))}
+        data: {urls: formattedJSON}
       }))
       .pipe(gulp.dest(config.templatesDistDir))
       .on('error', gutil.log);
