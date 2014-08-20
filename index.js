@@ -88,7 +88,9 @@ var packageJSON = require(process.cwd() + '/package.json'),
       sidebar: '.tmp/sidebar.html',
       sidebarTemplate: 'app/templates/includes/sidebar.jade',
 
-      markdownLayout: 'app/templates/layouts/markdown-layout.jade'
+      markdownLayout: 'app/templates/layouts/markdown-layout.jade',
+
+      siteColor: 'grey'
     };
 
 module.exports.setup = function(config, outerGulp){
@@ -123,7 +125,7 @@ module.exports.setup = function(config, outerGulp){
     return gulp.src(config.sidebarTemplate)
       .pipe(jade({
         basedir: 'app',
-        data: {urls: formattedJSON}
+        data: { urls: formattedJSON }
       }))
       .pipe(gulp.dest(config.templatesDistDir))
       .on('error', gutil.log);
@@ -171,8 +173,8 @@ module.exports.setup = function(config, outerGulp){
         var html = jadeEngine.renderFile(config.markdownLayout, {
           basedir: config.templatesBaseDir,
           pretty: true,
-            content: file.contents.toString('utf8')
-          
+          content: file.contents.toString('utf8'),
+          siteColor: packageJSON.siteColor ? packageJSON.siteColor : config.siteColor
         });
         file.contents = new Buffer(html);
         cb(null, file);
