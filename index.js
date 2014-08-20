@@ -170,11 +170,14 @@ module.exports.setup = function(config, outerGulp){
       .pipe(markdown())
       .pipe(es.map(function(file, cb) {
 
+        var ghURL = packageJSON.name + '/blob/master' + file.path.replace(process.cwd(), '').replace('.html','.md');
+
         var html = jadeEngine.renderFile(config.markdownLayout, {
           basedir: config.templatesBaseDir,
           pretty: true,
           content: file.contents.toString('utf8'),
-          siteColor: packageJSON.siteColor ? packageJSON.siteColor : config.siteColor
+          siteColor: packageJSON.siteColor ? packageJSON.siteColor : config.siteColor,
+          path: ghURL
         });
         file.contents = new Buffer(html);
         cb(null, file);
