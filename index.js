@@ -106,7 +106,7 @@ module.exports.setup = function(config, outerGulp){
   // /____/_/\__,_/\___/_.___/\__,_/_/     
 
   gulp.task('generate-urls', ['sitemap'], function(){
-    return gulp.src(config.distDir + '/**/*.html')
+    return gulp.src([config.distDir + '/**/*.html', config.distDir + '/**/*.pdf'])
       .pipe(print())
       .pipe(directoryMap({
         filename: config.urlsPath,
