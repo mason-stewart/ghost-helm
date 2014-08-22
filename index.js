@@ -189,7 +189,19 @@ module.exports.setup = function(config, outerGulp){
   gulp.task('templates', ['jade', 'markdown'], function(){
     return gulp.src(config.templatesDir + '/**/*.html')
       .pipe(gulp.dest(config.templatesDistDir));
+  });
 
+
+  //                ______    
+  //     ____  ____/ / __/____
+  //    / __ \/ __  / /_/ ___/
+  //   / /_/ / /_/ / __(__  ) 
+  //  / .___/\__,_/_/ /____/  
+  // /_/                      
+
+  gulp.task('pdfs', ['clean'], function(){
+    return gulp.src(config.templatesDir + '/**/*.pdf')
+      .pipe(gulp.dest(config.distDir));
   });
 
 
@@ -250,7 +262,7 @@ module.exports.setup = function(config, outerGulp){
   // We also use gulp-filter to grab just the JS and just the CSS
   // optimize, minify, etc.
 
-  gulp.task('use-ref', ['templates', 'styles', 'scripts'], function () {
+  gulp.task('use-ref', ['pdfs','templates', 'styles', 'scripts'], function () {
     // quick error handler for gulp-plumber
     var onError = function (err) {
       console.error(err);
