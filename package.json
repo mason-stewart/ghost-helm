@@ -1,6 +1,6 @@
 {
   "name": "ghost-helm",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "lindex.js",
   "description": "A set of build tools for The Iron Yard",
   "homepage": "https://github.com/masondesu/ghost-helm",
